@@ -5,6 +5,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+    body {
+        background-color: #0b0b0c !important;
+        color: #e0e0e0;
+    }
+    #sidebar {
+        background-color: #111114 !important;
+    }
+    .wrapper.style1,
+    .wrapper.style2,
+    .wrapper.style3 {
+        background-color: #141416 !important;
+    }
+    h1, h2, h3 {
+        color: #ffffff !important;
+    }
+    p, li {
+        color: #c8c8c8 !important;
+    }
+    .button {
+        background-color: #2b2b30 !important;
+        border-color: #444 !important;
+        color: #ffffff !important;
+    }
+    .button:hover {
+        background-color: #3a3a40 !important;
+    }
+    </style>
+
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 
@@ -14,7 +43,7 @@
     <div class="inner">
         <nav>
             <ul>
-                <li><a href="#intro">Overview</a></li>
+                <li><a href="#intro">Intro</a></li>
                 <li><a href="#game">Play</a></li>
                 <li><a href="#details">Details</a></li>
             </ul>
@@ -26,9 +55,9 @@
 
 <section id="intro" class="wrapper style1 fullscreen fade-up">
     <div class="inner">
-        <h1>Zelda (NES-Style Clone)</h1>
+        <h1>Zelda (Level 1: The Eagle) </h1>
         <p>
-        University project recreating core mechanics of the original Legend of Zelda.
+        EECS 494 project recreating the core mechanics of the original Legend of Zelda for the NES.
         </p>
         <ul class="actions">
             <li><a href="#game" class="button scrolly">Play Now</a></li>
@@ -38,7 +67,7 @@
 
 <section id="game" class="wrapper style2 fade-up">
     <div class="inner">
-        <h2>Playable WebGL Build</h2>
+        <h2>The Legend of Zelda</h2>
 
         <div id="unity-container" style="text-align:center;">
             <canvas id="unity-canvas" width="1024" height="960" tabindex="-1"></canvas>
@@ -59,38 +88,23 @@
 
         <h3>My Contributions</h3>
         <ul>
-            <li>Core player movement system (grid-locked NES behavior)</li>
-            <li>Enemy AI implementation (Keese, Stalfos, Aquamentus boss)</li>
-            <li>Combat systems (sword, boomerang, projectiles)</li>
-            <li>Room transitions and door locking logic</li>
-            <li>Custom mechanics including Frost Boots water-to-ice system</li>
+            <li>Core player movement system (grid locked NES behavior)</li>
+            <li>Enemy implementation (Keese, Stalfos, Aquamentus boss, Goriya)</li>
+            <li>Enemy spawning</li>
+            <li>Combat systems (Bomb)</li>
+            <li>Room transitions, old man room, and door locking logic</li>
+            <li>Custom mechanics (Frost Boots logic)</li>
         </ul>
 
         <h3>Technology Used</h3>
         <ul>
             <li>Unity (WebGL build)</li>
             <li>C#</li>
-            <li>Custom collision and animation systems</li>
-        </ul>
-
-        <h3>Controls</h3>
-        <ul>
-            <li>Arrow Keys – Move</li>
-            <li>Space – Attack</li>
-            <li>Press 4 – Quick access custom level</li>
         </ul>
     </div>
 </section>
 
 </div>
-
-<footer id="footer" class="wrapper style1-alt">
-    <div class="inner">
-        <ul class="menu">
-            <li>&copy; 2026 Your Name</li>
-        </ul>
-    </div>
-</footer>
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
