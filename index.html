@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Zelda WebGL</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <nav>
+                <ul>
+                    <li><a href="#intro">Welcome</a></li>
+                    <li><a href="#game">Game</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Intro -->
+        <section id="intro" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h1>Zelda WebGL Build</h1>
+                <p>Unity WebGL build hosted on GitHub Pages.</p>
+                <ul class="actions">
+                    <li><a href="#game" class="button scrolly">Play</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section id="game" class="wrapper style2 fade-up">
+            <div class="inner">
+
+                <div id="unity-container" style="text-align:center;">
+                    <canvas id="unity-canvas" width="1024" height="960" tabindex="-1"></canvas>
+                    <div id="unity-loading-bar">
+                        <div id="unity-progress-bar-empty">
+                            <div id="unity-progress-bar-full"></div>
+                        </div>
+                    </div>
+                    <div id="unity-warning"></div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; 2026 Zelda</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Template Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Unity Loader -->
+    <script>
+    var canvas = document.querySelector("#unity-canvas");
+
+    function unityShowBanner(msg, type) {
+        var warningBanner = document.querySelector("#unity-warning");
+        var div = document.createElement("div");
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == "error") div.style = "background:red;padding:10px;";
+        else {
+            div.style = "background:yellow;padding:10px;";
+            setTimeout(function () {
+                warningBanner.removeChild(div);
+            }, 5000);
+        }
+    }
+
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/web_build_ZELDA.loader.js";
+
+    var config = {
+        dataUrl: buildUrl + "/web_build_ZELDA.data",
+        frameworkUrl: buildUrl + "/web_build_ZELDA.framework.js",
+        codeUrl: buildUrl + "/web_build_ZELDA.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "EECS",
+        productName: "Zelda",
+        productVersion: "1.0",
+        showBanner: unityShowBanner
+    };
+
+    canvas.style.width = "1024px";
+    canvas.style.height = "960px";
+
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = function () {
+        createUnityInstance(canvas, config, function (progress) {
+            document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
+        }).then(function () {
+            document.querySelector("#unity-loading-bar").style.display = "none";
+        }).catch(function (message) {
+            alert(message);
+        });
+    };
+
+    document.body.appendChild(script);
+    </script>
+
+</body>
+</html>
