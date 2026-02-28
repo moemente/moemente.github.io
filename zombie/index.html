@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zombie Survival — moemente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #181717;
+            color: #eee;
+            font-family: 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 24px;
+            gap: 40px;
+        }
+
+        header {
+            width: 1280px;
+            max-width: 1280px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid #505050;
+            padding-bottom: 20px;
+        }
+
+        h1 { font-size: 0.95rem; letter-spacing: 0.03em; }
+
+        .back {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            color: #eee;
+            text-decoration: none;
+            transition: opacity 0.15s;
+        }
+        .back:hover { opacity: 0.6; }
+
+        #unity-container {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #unity-canvas {
+            width: 1280px;
+            height: 720px;
+            max-width: 100%;
+            background: #000;
+        }
+
+        #unity-loading-bar { width: 100%; max-width: 1280px; }
+
+        #unity-progress-bar-empty {
+            width: 1280px;
+            height: 2px;
+            background: #2a2a2a;
+        }
+
+        #unity-progress-bar-full {
+            width: 0%;
+            height: 100%;
+            background: #eee;
+            transition: width 0.1s;
+        }
+
+        #unity-warning { font-size: 0.7rem; color: #f05a4a; letter-spacing: 0.1em; }
+
+        .details {
+            width: 100%;
+            max-width: 1280px;
+            border-top: 1px solid #eee;
+            padding-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px 48px;
+        }
+
+        .details h2 {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: #5c5c5c;
+            margin-bottom: 14px;
+        }
+
+        .details ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+        .details li {
+            font-size: .9rem;
+            letter-spacing: 0.05em;
+            color: #eee;
+            line-height: 1.5;
+        }
+
+        .details li::before { content: '— '; color: #5c5c5c; }
+
+        footer { font-size: 0.6rem; letter-spacing: 0.2em; color: #eee; margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Zombie Survival</h1>
+        <a href="../index.html" class="back">← PORTFOLIO</a>
+    </header>
+
+    <div id="unity-container">
+        <canvas id="unity-canvas" tabindex="-1"></canvas>
+        <div id="unity-loading-bar">
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+        </div>
+        <div id="unity-warning"></div>
+    </div>
+
+    <div class="details">
+        <div>
+            <h2>CONTROLS</h2>
+            <ul>
+                <li>W A S D — Move</li>
+                <li>Mouse — Look</li>
+                <li>Left Click — Shoot</li>
+                <li>Right Click — Aim</li>
+                <li>R — Reload</li>
+                <li>Space — Swap weapon (once RPG purchased)</li>
+            </ul>
+        </div>
+        <div>
+            <h2>FEATURES</h2>
+            <ul>
+                <li>Endless wave survival with round scaling (The Director)</li>
+                <li>AK-74 with mag drop physics</li>
+                <li>RPG with particle system</li>
+                <li>Score multiplier system</li>
+                <li>Ammo and weapon pickups</li>
+                <li>End-game scoreboard with stats</li>
+            </ul>
+        </div>
+        <div>
+            <h2>STACK</h2>
+            <ul>
+                <li>Unity (WebGL build)</li>
+                <li>C#</li>
+                <li>NavMesh AI</li>
+                <li>Event Bus (Pub/Sub)</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>UNITY &nbsp;·&nbsp; C# &nbsp;·&nbsp; WEBGL</footer>
+
+    <script>
+        var canvas = document.querySelector("#unity-canvas");
+
+        function unityShowBanner(msg, type) {
+            var warning = document.querySelector("#unity-warning");
+            var div = document.createElement("div");
+            div.innerHTML = msg;
+            warning.appendChild(div);
+            if (type === "error") div.style.color = "#f05a4a";
+            else setTimeout(function() { warning.removeChild(div); }, 5000);
+        }
+
+        var buildUrl = "Build";
+        var config = {
+            dataUrl:            buildUrl + "/web_build.data.gz",
+            frameworkUrl:       buildUrl + "/web_build.framework.js.gz",
+            codeUrl:            buildUrl + "/web_build.wasm.gz",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName:        "DefaultCompany",
+            productName:        "web_build",
+            productVersion:     "1.0",
+            showBanner:         unityShowBanner
+        };
+
+        var script = document.createElement("script");
+        script.src = buildUrl + "/web_build.loader.js";
+        script.onload = function() {
+            createUnityInstance(canvas, config, function(progress) {
+                document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
+            }).then(function() {
+                document.querySelector("#unity-loading-bar").style.display = "none";
+            }).catch(function(msg) { alert(msg); });
+        };
+        document.body.appendChild(script);
+    </script>
+
+</body>
+</html>
