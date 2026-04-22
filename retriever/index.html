@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Retriever — moemente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #181717;
+            color: #eee;
+            font-family: 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 24px;
+            gap: 40px;
+        }
+
+        header {
+            width: 1280px;
+            max-width: 1280px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid #505050;
+            padding-bottom: 20px;
+        }
+
+        h1 { font-size: 0.95rem; letter-spacing: 0.03em; }
+
+        .back {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            color: #eee;
+            text-decoration: none;
+            transition: opacity 0.15s;
+        }
+        .back:hover { opacity: 0.6; }
+
+        .play-box {
+            width: 100%;
+            max-width: 1280px;
+            border: 1px solid #505050;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0;
+        }
+
+        .play-btn {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            color: #eee;
+            text-decoration: none;
+            border: 1px solid #eee;
+            padding: 16px 40px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .play-btn:hover {
+            background: #eee;
+            color: #181717;
+        }
+
+        .details {
+            width: 100%;
+            max-width: 1280px;
+            border-top: 1px solid #eee;
+            padding-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px 48px;
+        }
+
+        .details h2 {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: #5c5c5c;
+            margin-bottom: 14px;
+        }
+
+        .details ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+        .details li {
+            font-size: .9rem;
+            letter-spacing: 0.05em;
+            color: #eee;
+            line-height: 1.5;
+        }
+
+        .details li::before { content: '— '; color: #5c5c5c; }
+
+        footer { font-size: 0.6rem; letter-spacing: 0.2em; color: #eee; margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Retriever</h1>
+        <a href="../index.html" class="back">← PORTFOLIO</a>
+    </header>
+
+    <div class="play-box">
+        <a href="https://changliu2025.itch.io/the-retriever" class="play-btn" target="_blank">
+            PLAY ON ITCH.IO →
+        </a>
+    </div>
+
+    <div class="details">
+        <div>
+            <h2>CONTROLS</h2>
+            <ul>
+                <li>W A S D — Move</li>
+                <li>Mouse — Look</li>
+                <li>Left Click — Shoot</li>
+                <li>Right Click — Aim</li>
+                <li>R — Reload</li>
+                <li>Shift — Sprint</li>
+            </ul>
+        </div>
+        <div>
+            <h2>MY CONTRIBUTIONS</h2>
+            <ul>
+                <li>Guard characters and enemy AI behaviour</li>
+                <li>Noise-based alert system — gunshots notify guards within range</li>
+                <li>Glass penetration shooting mechanics</li>
+                <li>Safehouse design and implementation</li>
+                <li>Level decoration and environmental art</li>
+                <li>Voice actor casting and direction</li>
+            </ul>
+        </div>
+        <div>
+            <h2>STACK</h2>
+            <ul>
+                <li>Unity (WebGL build)</li>
+                <li>C#</li>
+                <li>NavMesh AI</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>UNITY &nbsp;·&nbsp; C# &nbsp;·&nbsp; WEBGL</footer>
+
+</body>
+</html>
